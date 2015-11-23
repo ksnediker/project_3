@@ -29,11 +29,11 @@ var User = require('./models/user');
 // creates answers and assigns them a cookie upon
 // starting a 'session'
 app.post('/users', function(req,res){
-	var user = new User({
+  var user = new User({
      email: req.body.email,
   });
 
-	user.save(function(err) {
+  user.save(function(err) {
     if (err){
       console.log(err);
       res.statusCode = 503;
@@ -54,42 +54,38 @@ app.post('/users', function(req,res){
 
 });
 
-var survey1 = new Survey({
- 		title: 'Our Survey',
-		question1: {
-			answer1: 0,
-			answer2: 0
-		},
-		question2: {
-			answer1: 0,
-			answer2: 0
-		},
+// post answers to survey
+app.put ( '/survey', function(req,res){  
+  var answer = 10;
+  result = Survey.findAndModify( { query: {_id: "56534196228559b5080f3a0a"}, update: { question1: {answer1: answer} } } );
+  // var answer =  survey1.update( { question1: {answer1: answer} });  
+    res.send( 
+      result );
+    // if (!err) console.log("Success!");
+  });
 
+// surveys route
+app.get('/surveys', function(req, res){
+
+  Survey.find().then(function(result){
+    res.send(result);
+
+  });
+});
+
+var survey1 = new Survey({
+    title: 'Our Dog Survey',
+    form1 : {
+      question: "What is your favorite dog?",
+      answers: [{Labrador: 1}, {Beagle: 1},{Poodle: 1}]
+    }
 });
 
 survey1.save(function (err) {
-	if (err) console.log(err);
-	console.log(survey1.title + ' created');
+  if (err) console.log(err);
+  console.log(survey1.title + ' created');
 })
 
 
-// post answers to surveys
-app.post ( '/answers', function(req,res){	 
-  var survey = Survey.find();
-  var answer = req.body.answer1;
 
-
-    res.send(answer);
-		// if (!err) console.log("Success!");
-	});
-});
-
-
-app.get('/surveys', function(req, res){
-
-	Survey.find().then(function(result){
-    res.send(result);
-
-	});
-});
 
