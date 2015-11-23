@@ -18,4 +18,8 @@ var secondRender = function() {
 
 $('#submit-email').click(function(){
 	$('#sign-up-form').hide();
+	firstRender();
+	$('#form-container').show();
+	$('#modal').show()
 })
+
