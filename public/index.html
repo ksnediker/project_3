@@ -2,27 +2,43 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
 
-	<div id = "edit-answer-form">
-		
-			<input type="number" name="quantity" min="1" max="5">
-			<br>
-				<button id = "submit-answer"> answer </button>
-			<br>
+	<div id="sign-up-form">
+		<h1>Sign up to take survey</h1>
+		<input id="user-email" placeholder="Enter Email"></input>
+		<button id="submit-email">Submit</button>
+	</div>
+	<div id="modal">
+		<div class="section" id="form-container"></div>
+	</div>
+	<script id="first-template" type="text/x-handlebars-template">
+		<div class="entry">
+			<h1>{{title}}</h1>
+			<div class="body">
+				{{body}}
+			</div>
 		</div>
+	</script>
 
+	<script id="second-template" type="text/x-handlebars-template">
+		<div class="entry">
+			<h1>{{title}}</h1>
+			<div class="body">
+				{{body}}
+			</div>
+		</div>
+	</script>
 
+	<div class="section" id="form-container"></div>
+	<div class="section-two" id="form-container-two"></div>
 
-
-
-	
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.js"></script>
-	<script type="text/javascript" src= "app.js"></script>
-
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
 </body>
 </html>

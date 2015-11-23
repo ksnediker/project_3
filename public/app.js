@@ -1,25 +1,25 @@
-console.log('check checking');
+var firstRender = function() {
+	$('#form-container').empty();
+	var source = $("#first-template").html();
+	var template = Handlebars.compile(source);
 
-$("#submit-answer").click( function(){
-	var answer = parseInt($("input[name='quantity'").val());	
-	console.log(answer);
-	
+	var context = {title: "My New Post", body: "This is my first post!"};
+	$('#form-container').append(template(context));
+};
 
-	$.ajax({
-		url: "/survey",
-		type: "PUT",
-		data: answer,
-		dataType: "number"
-	});
-	console.log(answer);
+var secondRender = function() {
+	$('#form-container-two').empty();
+	var source = $('#second-template').html();
+	var template = Handlebars.compile(source);
 
-});
+	var context = {title: "Testing my second post", body: "This is my second test, deal with it!"};
+	$('#form-container-two').append(template(context));
+};
 
+$('#submit-email').click(function(){
+	$('#sign-up-form').hide();
+	firstRender();
+	$('#form-container').show();
+	$('#modal').show()
+})
 
-$.ajax('http://localhost:3000/surveys').done( function(data){
-	// for (var i=0; i < data.lenght; i++) {
-		console.log(  data[51].form1.question);
-		console.log(  data[51].form1.answers[0].Labrador);
-
-	// }
-	});	
