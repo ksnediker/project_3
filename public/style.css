@@ -1,0 +1,19 @@
+.section {
+	height: 25em;
+	width: 100%;
+	background-color: rgb(149, 43, 29);
+}
+
+.section-two {
+	height: 25em;
+	width: 100%;
+	background-color: rgb(254, 253, 245);
+}
+
+#form-container {
+	display: none;
+}
+
+#form-container-two {
+	display: none;
+}
