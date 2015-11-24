@@ -55,14 +55,11 @@ app.post('/users', function(req,res){
 });
 
 // post answers to survey
-app.put ( '/survey', function(req,res){  
-  var answer = 10;
-  result = Survey.findAndModify( { query: {_id: "56534196228559b5080f3a0a"}, update: { question1: {answer1: answer} } } );
-  // var answer =  survey1.update( { question1: {answer1: answer} });  
-    res.send( 
-      result );
-    // if (!err) console.log("Success!");
+app.put ( '/surveys/:id', function(req,res){  
+  Survey.findOneAndUpdate( {_id: req.params.id}, req.body, function(err, survey) {
+    res.send(survey);
   });
+});
 
 // surveys route
 app.get('/surveys', function(req, res){
@@ -73,18 +70,18 @@ app.get('/surveys', function(req, res){
   });
 });
 
-var survey1 = new Survey({
-    title: 'Our Dog Survey',
-    form1 : {
-      question: "What is your favorite dog?",
-      answers: [{Labrador: 1}, {Beagle: 1},{Poodle: 1}]
-    }
-});
+// var survey1 = new Survey({
+//     title: 'Our Dog Survey',
+//     form1 : {
+//       question: "What is your favorite dog?",
+//       answers: [{Labrador: 1}, {Beagle: 1},{Poodle: 1}]
+//     }
+// });
 
-survey1.save(function (err) {
-  if (err) console.log(err);
-  console.log(survey1.title + ' created');
-})
+// survey1.save(function (err) {
+//   if (err) console.log(err);
+//   console.log(survey1.title + ' created');
+// })
 
 
 

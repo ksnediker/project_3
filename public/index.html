@@ -22,9 +22,10 @@
 			<h1>{{title}}</h1>
 			<div class="body">
 				{{#each body}}
-					<input type="checkbox" id={{@key}}>{{this}}</input>					
+					<input type="checkbox" value={{this}} id={{@key}}>{{this}}</input>					
 					<br>
 				{{/each}}
+				<button id="submit-answer">Submit</button>
 			</div>
 		</div>
 	</script>
