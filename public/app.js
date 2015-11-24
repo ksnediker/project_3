@@ -2,9 +2,27 @@ var firstRender = function() {
 	$('#form-container').empty();
 	var source = $("#first-template").html();
 	var template = Handlebars.compile(source);
+	
+	$.ajax('http://localhost:3000/surveys').done( function(data){
+   		
+   			var arr = [];
+		
+			var context = {
+   				title: data[0].form1.question, 
+   				body: arr
+   			};
+   			
+   			$.each(data[0].form1.answers, function(index, value){
+   				console.log(Object.keys(value)[0])
+   				arr.push(Object.keys(value)[0]);
+   			});
+		
+		console.log(arr);
+   		
 
-	var context = {title: "My New Post", body: "This is my first post!"};
-	$('#form-container').append(template(context));
+   		$('#form-container').append(template(context));
+   		console.log(data[0].form1.answers.length)
+    });
 };
 
 var secondRender = function() {

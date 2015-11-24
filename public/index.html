@@ -21,7 +21,10 @@
 		<div class="entry">
 			<h1>{{title}}</h1>
 			<div class="body">
-				{{body}}
+				{{#each body}}
+					<input type="checkbox" id={{@key}}>{{this}}</input>					
+					<br>
+				{{/each}}
 			</div>
 		</div>
 	</script>
