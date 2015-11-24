@@ -56,11 +56,26 @@ app.post('/users', function(req,res){
 
 // post answers to survey
 app.put ( '/surveys/:id', function(req,res){  
+  // console.log(req.body)
+  for(var i in req.body) {
+   
+    Survey.findOneAndUpdate(
+      {_id: req.params.id},
+      {i: req.body[i]},
+      {upsert: true},
+      function(err, survey) {
+        res.send(survey);
+        console.log(survey)
+        // console.log(survey.form1.answers[1]);
+      
+    })
+  
+  // console.log(thing)
+  // console.log(req.body[thing]);
   // Survey.findOneAndUpdate( {_id: req.params.id}, req.body, function(err, survey) {
-  //   res.send(survey);
-  console.log("test")
-  // form1.answers[ {changeData}  ]
-  // });
+    // res.send(survey);
+    
+  };
 });
 
 // surveys route
