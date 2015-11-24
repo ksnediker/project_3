@@ -1,6 +1,7 @@
 // $(document).ready(function(){
-
+	var $getKeyName = null;
 	var arr = [];
+	var changeData = null;
 
 	var firstRender = function() {
 		$('#form-container').empty();
@@ -26,13 +27,10 @@
 	   		$('#submit-answer').click(function(){
 					for (var k = 0; k < arr.length; k++) {
 						if ($( '#' + k ).is(':checked')){
-							var getKeyName = $( '#' + k ).val()
+							var $getKeyName = $( '#' + k ).val()
+							data[0].form1.answers[k][$getKeyName] = data[0].form1.answers[k][$getKeyName] + 1
+							changeData = data[0].form1.answers[k]
 							updateData();
-							data[0].form1.answers[0].getKeyName = data[0].form1.answers[0].getKeyName + 1
-							console.log(getKeyName)
-							// var test = data[0].form1.answers[0]
-							// console.log(test)
-							// secondRender();
 						}
 					}
 				});
@@ -57,25 +55,25 @@
 
 	var updateData = function() {
 
-		var answersArr = [];
-		for (var b = 0; b < arr.length; b++) {			
-			answersArr.push($('#' + b).val());
-				if ($( '#' + b ).is(':checked')){
-				var getKeyName = $( '#' + b ).val()
+		// var answersArr = [];
+		// for (var b = 0; b < arr.length; b++) {			
+		// 	answersArr.push($('#' + b).val());
+				
+				
 				// console.log(getKeyName.val());
-			}
-		}
-		
+		// 	}
+		// }
+		console.log(changeData);
 
-		var surveyData = {
+		// var surveyData = {
 		
-		};
+		// };
 
-		// $.ajax({
-		// url: "http://localhost:3000/surveys/" + test,
-		// method: "PUT",
-		// data: surveyData
-		// }).done(getInstructors);
+		$.ajax({
+		url: "http://localhost:3000/surveys/5654a916b6cdb90e1c04aec8",
+		method: "PUT",
+		data: changeData
+		});
 	}
 
 	

@@ -56,9 +56,11 @@ app.post('/users', function(req,res){
 
 // post answers to survey
 app.put ( '/surveys/:id', function(req,res){  
-  Survey.findOneAndUpdate( {_id: req.params.id}, req.body, function(err, survey) {
-    res.send(survey);
-  });
+  // Survey.findOneAndUpdate( {_id: req.params.id}, req.body, function(err, survey) {
+  //   res.send(survey);
+  console.log("test")
+  // form1.answers[ {changeData}  ]
+  // });
 });
 
 // surveys route
