@@ -1,4 +1,16 @@
 
+$('Submit').click(function(){
+
+});
+
+
+$.ajax('http://localhost:3000/survey').done( function(data){
+    for (var i= 0; i < data.length; i ++){
+    		var a= 1
+    		console.log(data[0].form11.answers[i].Dogs);
+        };
+});
+
 var firstRender = function() {
 	$('#form-container').empty();
 	var source = $("#first-template").html();

@@ -61,11 +61,16 @@ app.get( '/'
 // update survey values
 app.put ( '/survey', function(req,res){  
   var survey = Survey.find();
-    // if (!err) console.log("Success!");
+  var answer = req.body.value;
+  var value = survey[0].form1.answers[0].Dogs ++;
+
+
+
+
   });
 
 // surveys route to check it
-app.get('/survey', function(req, res){
+app.get('/surveys', function(req, res){
   Survey.find().then(function(result){
     res.send(result);
 
