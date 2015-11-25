@@ -1,7 +1,7 @@
 // $(document).ready(function(){
 	var $getKeyName = null;
 	var arr = [];
-	var changeData = null;
+	var changeData = [];
 
 	var firstRender = function() {
 		$('#form-container').empty();
@@ -29,10 +29,13 @@
 						if ($( '#' + k ).is(':checked')){
 							var $getKeyName = $( '#' + k ).val()
 							data[0].form1.answers[k][$getKeyName] = data[0].form1.answers[k][$getKeyName] + 1
-							changeData = data[0].form1.answers[k]
-							updateData();
+							changeData.push(data[0].form1.answers[k])
+							
+						} else {
+							changeData.push(data[0].form1.answers[k])
 						}
 					}
+					updateData();
 				});
 	    });
 	};
@@ -55,16 +58,18 @@
 
 	var updateData = function() {
 
+		var newData = []
 		// var answersArr = [];
-		// for (var b = 0; b < arr.length; b++) {			
-		// 	answersArr.push($('#' + b).val());
+		for (var b = 0; b < arr.length; b++) {			
+			// answersArr.push($('#' + b).val());
+				newData.push(JSON.stringify(changeData[b]));
 				
-				
-				// console.log(getKeyName.val());
-		// 	}
+			// 	console.log(getKeyName.val());
+			}
 		// }
-		console.log(changeData);
 
+		
+		console.log(newData);
 		// var surveyData = {
 		
 		// };
@@ -72,7 +77,7 @@
 		$.ajax({
 		url: "http://localhost:3000/surveys/56539900a8c24cf7980fc777",
 		method: "PUT",
-		data: changeData
+		data: newData
 		});
 	}
 
