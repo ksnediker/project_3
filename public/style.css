@@ -1,3 +1,20 @@
+body {
+	font-family: "Andale Mono";
+}
+
+.questions{
+	display: block;
+	margin: 50px auto;
+}
+
+.question {
+	padding: 20px;
+	border-radius: 10px;
+	border-style: solid;
+	display: inline-block;
+}
+
+
 .section {
 	height: 25em;
 	width: 100%;
