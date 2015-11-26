@@ -1,14 +1,13 @@
-<<<<<<< HEAD
 
 $('Submit').click(function(){
 
 });
 
 
-$.ajax('http://localhost:3000/survey').done( function(data){
+$.ajax('http://localhost:3000/surveys').done( function(data){
     for (var i= 0; i < data.length; i ++){
     		var a= 1
-    		console.log(data[0].form11.answers[i].Dogs);
+    		console.log(data[0].form1.answers[i].Dogs);
         };
 });
 
@@ -36,12 +35,11 @@ $('#submit-email').click(function(){
 	$('#form-container').show();
 	$('#modal').show()
 })
-=======
+
 // $(document).ready(function(){
 	var $getKeyName = null;
 	var arr = [];
 	var changeData = null;
->>>>>>> 6cdacdcfdd3884d1b0a41b91b222b5793585a78d
 
 	var firstRender = function() {
 		$('#form-container').empty();
@@ -50,12 +48,15 @@ $('#submit-email').click(function(){
 		
 		$.ajax('http://localhost:3000/surveys').done( function(data){
 	   		
-			
+			 // for (var z= 0	; z < data.length; z ++) {	
+	   			    
 				var context = {
 	   				title: data[0].form1.question, 
 	   				body: arr
 	   			};
-	   			
+
+	   		
+
 	   		// console.log(data[0].form1.answers.indexOf("Labrador"));
 	   		// console.log(data[0].form1.answers[0])
 	   			$.each(data[0].form1.answers, function(index, value){
@@ -74,8 +75,12 @@ $('#submit-email').click(function(){
 						}
 					}
 				});
-	    });
-	};
+
+	   		// }
+		});
+
+	}
+
 
 	var secondRender = function() {
 		$('#form-container-two').empty();
@@ -110,7 +115,7 @@ $('#submit-email').click(function(){
 		// };
 
 		$.ajax({
-		url: "http://localhost:3000/surveys/56539900a8c24cf7980fc777",
+		url: "http://localhost:3000/surveys/556539900a8c24cf7980fc777",
 		method: "PUT",
 		data: changeData
 		});
