@@ -54,6 +54,7 @@ app.post('/users', function(req,res){
 
 });
 
+<<<<<<< HEAD
 app.get( '/'
 
   )
@@ -68,6 +69,31 @@ app.put ( '/survey', function(req,res){
 
 
   });
+=======
+// post answers to survey
+app.put ( '/surveys/:id', function(req,res){  
+  // console.log(req.body)
+  for(var i in req.body) {
+   
+    Survey.findOneAndUpdate(
+      {_id: req.params.id},
+      {i: req.body[i]},
+      {upsert: true},
+      function(err, survey) {
+        res.send(survey);
+        console.log(survey)
+        // console.log(survey.form1.answers[1]);
+      
+    })
+  
+  // console.log(thing)
+  // console.log(req.body[thing]);
+  // Survey.findOneAndUpdate( {_id: req.params.id}, req.body, function(err, survey) {
+    // res.send(survey);
+    
+  };
+});
+>>>>>>> 6cdacdcfdd3884d1b0a41b91b222b5793585a78d
 
 // surveys route to check it
 app.get('/surveys', function(req, res){
@@ -77,6 +103,7 @@ app.get('/surveys', function(req, res){
   });
 });
 
+<<<<<<< HEAD
 
 // var survey1 = new Survey({
 //     title: 'GA Survey',
@@ -131,6 +158,13 @@ app.get('/surveys', function(req, res){
 //     form11: {
 //       question: "Dogs or cats?",
 //       answers: [{ "Dogs" :0 }, {"Cats" :0}, {"Piglets" : 0}]
+=======
+// var survey1 = new Survey({
+//     title: 'Our Dog Survey',
+//     form1 : {
+//       question: "What is your favorite dog?",
+//       answers: [{Labrador: 1}, {Beagle: 1},{Poodle: 1}]
+>>>>>>> 6cdacdcfdd3884d1b0a41b91b222b5793585a78d
 //     }
 // });
 
@@ -138,6 +172,7 @@ app.get('/surveys', function(req, res){
 //   if (err) console.log(err);
 //   console.log(survey1.title + ' created');
 // })
+<<<<<<< HEAD
 
 // 
 // CLASS QUESTIONS (BONUS: DRAG AND DROP AVATARS)
@@ -157,6 +192,8 @@ app.get('/surveys', function(req, res){
 
 
 
+=======
+>>>>>>> 6cdacdcfdd3884d1b0a41b91b222b5793585a78d
 
 
 
