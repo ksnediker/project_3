@@ -1,10 +1,10 @@
-// $(document).ready(function(){
+$(document).ready(function(){
 	var $getKeyName = null;
 	var arr = [];
 	var changeData = [];
 	var id = null;
 
-	var firstRender = function() {
+	var firstQuestion = function() {
 		
 		$('#form-container').empty();
 		var source = $("#first-template").html();
@@ -40,37 +40,35 @@
 	var secondRender = function() {
 		// $('#form-container-two').empty();
 		$('#form-container').hide();
-		var source = $('#second-template').html();
-		var template = Handlebars.compile(source);
 
 		$.ajax('http://localhost:3000/surveys').done( function(data){
 
-			var testing = Object.keys(data[0].form1.answers[0]);
+			var answerNames = Object.keys(data[0].form1.answers[0]);
 			var genderPieData = [];
 
 
-			for (var d = 0; d < testing.length; d++) {
-				console.log(data[0].form1.answers[0][testing[d]])
+			for (var d = 0; d < answerNames.length; d++) {
 				
-				genderPieData.push( {value: data[0].form1.answers[0][testing[d]], color: getRandomColor(), label: testing[d]})
+				genderPieData.push({
+					value: data[0].form1.answers[0][answerNames[d]], 
+					color: getRandomColor(), 
+					label: answerNames[d]
+				})
+				var test = genderPieData[d].color;
+				$('#legend-list').append("<li class='block' id='block" + d + "'></li>");
+				$('#block' + d).css({
+					"background-color": test,
+					"height": "10%",
+					"width": "10%",
+				}).append("<h3>     " + answerNames[d] + "</h3>");;
 			}
 
-			// var genderPieData = [
-			// 		{value: data[0].form1.answers[0].Beagle,
-			// 			color: getRandomColor(),
-			// 			label: testing }
-			// ]
-
+			console.log(genderPieData)
 
 			var pieOptions = {
-			  segmentShowStroke : false,
-			  animateScale : true
+			  segmentShowStroke : true,
+			  animateScale : true,
 			}
-
-			// var context = {
-	  //  				title: data[0].question, 
-	  //  				body: newGenderChart
-	  //  	};
 
 
 	   	var $showChart = $('#show-chart').get(0).getContext("2d");
@@ -81,7 +79,7 @@
 
 	$('#submit-email').click(function(){
 		$('#sign-up-form').hide();
-		firstRender();
+		firstQuestion();
 		$('#form-container').show();
 		$('#modal').show()
 	})
@@ -94,6 +92,7 @@
 		data: changeData[0]
 		});
 		secondRender();
+		$('#modal').hide();
 	}
 
 	function getRandomColor() {
@@ -135,5 +134,5 @@
 	// 		var newGenderChart = new Chart(gender).Pie(genderPieData, pieOptions);
 	// 	});
 	// };
-// });
+});
 

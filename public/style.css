@@ -59,3 +59,14 @@
 .entry > h1 {
 	margin: 3% 1% 1% 1%;
 }
+
+#show-chart {
+	height: 50%;
+	width: 50%;
+}
+
+#legend-list {
+	list-style-type: none;
+}
+
+
