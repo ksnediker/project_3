@@ -56,26 +56,23 @@ app.post('/users', function(req,res){
 
 // post answers to survey
 app.put ( '/surveys/:id', function(req,res){  
-  // console.log(req.body)
-  for(var i in req.body) {
-   
-    Survey.findOneAndUpdate(
-      {_id: req.params.id},
-      {i: req.body[i]},
-      {upsert: true},
-      function(err, survey) {
-        res.send(survey);
-        console.log(survey)
-        // console.log(survey.form1.answers[1]);
-      
-    })
   
-  // console.log(thing)
-  // console.log(req.body[thing]);
-  // Survey.findOneAndUpdate( {_id: req.params.id}, req.body, function(err, survey) {
-    // res.send(survey);
-    
+  var newData = {};
+
+  for(var i in req.body) {
+    // console.log(i);
+    var changeVal = JSON.parse(req.body[i]);
+    var targetKey = i;
+    newData[i] = changeVal;
+    console.log(newData);
   };
+
+  Survey.findOneAndUpdate({_id: req.params.id}, { form1 : { answers:[  newData  ] } } , function(err, survey) {
+      // console.log(survey.form1.answers)
+  });
+   
+
+   
 });
 
 // surveys route
@@ -91,7 +88,7 @@ app.get('/surveys', function(req, res){
 //     title: 'Our Dog Survey',
 //     form1 : {
 //       question: "What is your favorite dog?",
-//       answers: [{Labrador: 1}, {Beagle: 1},{Poodle: 1}]
+//       answers: {Labrador: 0, Beagle: 0, Poodle: 0}
 //     }
 // });
 
