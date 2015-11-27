@@ -35,3 +35,27 @@
 	height: 75%;
 	background-color: red;
 }
+
+#submit-email {
+	width: 8em;
+	height: 3em;
+}
+
+#user-email {
+	width: 11em;
+	height: 3em;
+}
+
+.body > input {
+	margin: 1% 1% 1% 1%;
+}
+
+.body > button {
+	margin: 1% 1% 1% 1%;
+	width: 8em;
+	height: 3em;
+}
+
+.entry > h1 {
+	margin: 3% 1% 1% 1%;
+}

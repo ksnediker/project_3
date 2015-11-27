@@ -86,8 +86,8 @@ app.get('/surveys', function(req, res){
 
 // var survey1 = new Survey({
 //     title: 'Our Dog Survey',
+//     question: "What is your favorite dog?",
 //     form1 : {
-//       question: "What is your favorite dog?",
 //       answers: {Labrador: 0, Beagle: 0, Poodle: 0}
 //     }
 // });

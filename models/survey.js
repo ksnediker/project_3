@@ -7,8 +7,8 @@ var AnswerSchema = new mongoose.Schema({
 var SurveySchema = new mongoose.Schema({
 		title: String,
 		// questions: [ QuestionSchema]
-		 form1 : {
-			question: String,
+		question: String,
+		form1 : {
 			answers : []
 	}
 
