@@ -68,7 +68,7 @@ app.put ( '/surveys/:id', function(req,res){
   };
 
   Survey.findOneAndUpdate({_id: req.params.id}, { form1 : { answers:[  newData  ] } } , function(err, survey) {
-      // console.log(survey.form1.answers)
+      
   });
    
 
