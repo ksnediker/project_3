@@ -134,20 +134,25 @@ $(document).ready(function(){
 				$('#block' + d).css({
 					"background-color": legendColor,
 					"height": "10%",
-					"width": "10%",
+					"width": "100%",
 					"text-shadow": "white 1px 1px"
 				}).append("<h3>     " + answerNames[d] + ":  " + pieValue + "</h3>");;
 			}
 
 			var pieOptions = {
 			  segmentShowStroke : true,
+			 	segmentStrokeColor: "rgb(48,48,48)",
 			  animateScale : true,
 			}
 
 			$('#chart-container').prepend("<canvas id='show-chart'></canvas>");
 	   	var $showChart = $('#show-chart').get(0).getContext("2d");
 			var newChart = new Chart($showChart).Pie(pieData, pieOptions);
-			$('#show-chart').append(newChart);
+			$('#show-chart').append(newChart).css({
+				"display": "inline-block",
+				"top": "50",
+				"right": "400"
+			});
 		});
 	};
 

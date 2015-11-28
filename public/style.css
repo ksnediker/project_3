@@ -5,7 +5,10 @@
 	background-color: rgba(149, 43, 29, .4);
 }
 
-
+#sign-up-form {
+	margin-top: 6%;
+	margin-left: 7%;
+}
 
 .section-two {
 	height: 25em;
@@ -78,21 +81,30 @@ button {
 #show-chart {
 	height: 50%;
 	width: 50%;
+	margin-top: 3%;
 }
 
 #legend-list {
 	list-style-type: none;
+	display: inline-block;
 }
 
+#legend {
+	display: inline-block;
+}
 input {
 	font-size: 1em;
 }
 #chart-container {
 	display: none;
 	background-color: #C8C8C8;
+	margin-top: 10%;
 }
 
 #third-question {
 	display: none;
 }
 
+h3 {
+	text-align: center;
+}
