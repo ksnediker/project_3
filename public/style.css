@@ -1,8 +1,11 @@
 .section {
-	height: 25em;
-	width: 100%;
-	background-color: rgb(149, 43, 29);
+	height: 33em;
+	width: 90%;
+	margin-left: 5%;
+	background-color: rgba(149, 43, 29, .4);
 }
+
+
 
 .section-two {
 	height: 25em;
@@ -33,12 +36,24 @@
 	left: 25%;
 	width: 75%;
 	height: 75%;
-	background-color: red;
 }
 
-#submit-email {
+/*#submit-email {
 	width: 8em;
 	height: 3em;
+	background-color: blue;
+	color: white;
+	font-size: .9em;
+	margin-left: 2%;
+}*/
+
+button {
+	width: 8em;
+	height: 3em;
+	background-color: blue;
+	color: white;
+	font-size: .9em;
+	margin-left: 2%;
 }
 
 #user-email {
@@ -69,8 +84,15 @@
 	list-style-type: none;
 }
 
+input {
+	font-size: 1em;
+}
 #chart-container {
 	display: none;
-	background-color: grey;
+	background-color: #C8C8C8;
+}
+
+#third-question {
+	display: none;
 }
 

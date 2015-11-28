@@ -101,6 +101,12 @@ $(document).ready(function(){
 		renderFirstTemplate();
 	};
 
+	var thirdQuestion = function() {
+		currentForm(3);
+		currentQuestion(3);
+		renderFirstTemplate();
+	}
+
 	var chartRender = function() {
 		$('#chart-container').show();
 		$('#modal').toggle('fold');
@@ -129,6 +135,7 @@ $(document).ready(function(){
 					"background-color": legendColor,
 					"height": "10%",
 					"width": "10%",
+					"text-shadow": "white 1px 1px"
 				}).append("<h3>     " + answerNames[d] + ":  " + pieValue + "</h3>");;
 			}
 
@@ -153,11 +160,20 @@ $(document).ready(function(){
 
 	$('#next-question').click(function(){
 		$('canvas').remove();
-		// $('#legend').empty();
+		$('#legend-list').empty();
   	$('#chart-container').toggle( "fold" );
-  	// $('#chart-container').empty();
+  	$('#next-question').hide();
+  	$('#third-question').show();
   	secondQuestion();
 	})
+
+	$('#third-question').click(function(){
+		$('canvas').remove();
+		$('#legend-list').empty();
+  	$('#chart-container').toggle( "fold" );
+  	$('#third-question').hide();
+  	thirdQuestion();
+	});
 
 	var updateData = function() {
 
