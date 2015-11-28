@@ -32,20 +32,25 @@
 	</script>
 
 	<script id="second-template" type="text/x-handlebars-template">
-		<div class="entry">
-			<h1>{{title}}</h1>
-			<div class="body">
-				{{body}}
-			</div>
-		</div>
-	</script>
+	// 	<div class="entry">
+	// 		<br><br>
+	// 		<h1>{{title}}</h1>
+	// 		<div class="body">
+	// 			{{#each body}}
+	// 				<input type="radio" name="radAnswer" value={{this}} id={{@key}}>{{this}}</input>					
+	// 				<br>
+	// 			{{/each}}
+	// 			<button id="submit-answer">Submit</button>
+	// 		</div>
+	// 	</div>
+	// </script>
 
 	<div id="chart-container">
-		<canvas id="show-chart"></canvas>
 		<div id="legend">
 			<ul id="legend-list">
 			</ul>
 		</div>
+		<button id="next-question">Next Question</button>
 	<div>
 
 	<div class="section" id="form-container"></div>

@@ -69,4 +69,8 @@
 	list-style-type: none;
 }
 
+#chart-container {
+	display: none;
+	background-color: grey;
+}
 
