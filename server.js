@@ -16,7 +16,7 @@ app.use(cookieParser());
 // app.use(jsCookie());
 
 // DATABASE
-mongoose.connect('mongodb://localhost/new_app');
+mongoose.connect('mongodb://localhost/project_3');
 
 // LISTENER
 app.listen(port);
@@ -75,7 +75,7 @@ app.put ( '/surveys/:id', function(req,res){
    
 });
 
-// surveys route
+// surveys GET route
 app.get('/surveys', function(req, res){
 
   Survey.find().then(function(result){
@@ -83,6 +83,16 @@ app.get('/surveys', function(req, res){
 
   });
 });
+
+// users GET route
+app.get('/users', function(req, res){
+
+  User.find().then(function(result){
+    res.send(result);
+
+  });
+});
+
 
 // sample survey
 
