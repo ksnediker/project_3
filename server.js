@@ -100,43 +100,35 @@ app.get('/surveys', function(req, res){
 //     question3: "How many GA courses have you taken including this one?",
 //     form3 : {
 //       answers: {"One": 31, "Two or Three": 35, "Four or Five": 33, "Five plus": 44 }
+//     },
+//     question4: "What industry were you in prior to WDI?",
+//     form4 : {     
+//       answers: {"Healthcare": 15, "Finance": 15, "Consulting": 20, "Technology" : 30, "Real Estate": 7, "Education" : 10, "Hospitality" : 4, "Student" : 10, "Other" : 18}
+//     },
+//     question5: "What would be your ideal position after WDI?",
+//     form5 : {
+//       answers: {"Full Stack Developer": 5, "Front end Developer": 15, "Back end Developer": 10, "Software Engineer": 8, "Database Administrator": 9, "Other": 5}
+//     },
+//     question6: "How did WDI match your expectations?",
+//     form6 : {
+//       answers: {"Easy Peezy": 15, "Kinda Hard": 25, "Whatever": 9}
+//     },
+//     question7: "What is your favorite stack?",
+//     form7: { 
+//       answers: {"Ruby_on_Rails" : 30,  "MEAN" : 20, "Python_Django" : 10, "Other": 5}
+//     },
+//     question8: "Is it pronounced 'Gif' or 'Jif'?",
+//     form8: {
+//       answers: {"Gif" : 18, "Jif" : 28, "Who cares": 5}
+//     },
+//     question9: "Marvel or DC?",
+//     form9: {
+//       answers: { "Marvel": 4, "DC" : 5, "Who cares" : 0}
+//     },
+//     question10: "Dogs or cats?",
+//     form10: {
+//       answers: { "Dogs" : 5, "Cats" :5, "Piglets" : 28}
 //     }
-    // form4 : {
-    //   question: "What industry were you in prior to WDI?",
-    //   answers: [{"Healthcare": 15}, {"Finance": 15}, {"Consulting": 20}, {"Technology" : 30}, {"Real_Estate": 7}, {"Education" : 10}, {"Hospitality" : 4}, {"Student" : 10}, {"Other" : 18}]
-    // },
-
-    // form5 : {
-    //   question: "What would be your ideal position after WDI?",
-    //   answers: [{"Full_Stack_Developer": 5}, {"Front_end_Developer": 15},{"Back_end_Developer": 10}, {"Software_Engineer": 8}, {"Database_Administrator": 9}, {"Other": 5} ]
-    // },
-
-    //  form6 : {
-    //   question: "How did WDI match your expectations?",
-    //   answers: [{"Class_is_as_difficult_as_I_expected": 15}, {"Class_is_more_difficult_than_I_expected": 25},{"Class_is_easier_than_I_expected": 9}]
-    // },
-
-    //   form6 : {
-    //   question: "Compared to the rest of the class, which percentile would you place yourself into in terms of your programming skills and abilities?",
-    //   answers: [{"Bottom_Quarter": 5}, {"Second_Quarter": 15},{"Third_Quarter": 27}, {"Top_Quarter":28}]
-    // },
-    // form7: {
-    //   question: "What is your favorite stack?", 
-    //   answers: [{"Ruby_on_Rails" : 30}, { "MEAN" : 20 }, {"Python_Django" : 10}, {"Other": 5}]
-    // },
-    // form8: {
-    //   question:" Is it pronounced 'Gif' or 'Jif'?",
-    //   answers: [{"Gif" : 18 }, { "Jif" : 28}, {"Who_cares": 5}]
-    // },
-    // form9: {
-    //   question: "Marvel or DC?",
-    //   answers: [{ "Marvel": 4 }, {"DC" : 5}, {"Who_cares" :46}]
-    // },
-    // form10: {
-    //   question: "Dogs or cats?",
-    //   answers: [{ "Dogs" : 5 }, {"Cats" :5}, {"Piglets" : 28}]
-
-    // }
 
 //   });
 

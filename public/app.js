@@ -17,7 +17,8 @@ $(document).ready(function(){
 	   		$.each((data[0][form].answers[0]), function(index, value){
 	   				arr.push(index);
 	   		});
-	   		console.log(question)
+	   		console.log(data[0][form]);
+	   		console.log(question);
 	   		var context = {
 	   				title: data[0][form, question], 
 	   				body: arr
@@ -107,6 +108,49 @@ $(document).ready(function(){
 		renderFirstTemplate();
 	}
 
+	var fourthQuestion = function() {
+		currentForm(4);
+		currentQuestion(4);
+		renderFirstTemplate();
+	}
+
+	var fifthQuestion = function() {
+		currentForm(5);
+		currentQuestion(5);
+		renderFirstTemplate();
+	}
+
+	var sixthQuestion = function() {
+		currentForm(6);
+		currentQuestion(6);
+		renderFirstTemplate();
+	}
+
+	var seventhQuestion = function() {
+		console.log("Hello");
+		currentForm(7);
+		currentQuestion(7);
+		renderFirstTemplate();
+	}
+
+	var eigthQuestion = function() {
+		currentForm(8);
+		currentQuestion(8);
+		renderFirstTemplate();
+	}
+
+	var ninthQuestion = function() {
+		currentForm(9);
+		currentQuestion(9);
+		renderFirstTemplate();
+	}
+
+	var tenthQuestion = function() {
+		currentForm(10);
+		currentQuestion(10);
+		renderFirstTemplate();
+	}
+
 	var chartRender = function() {
 		$('#chart-container').show();
 		$('#modal').toggle('fold');
@@ -149,7 +193,7 @@ $(document).ready(function(){
 	   	var $showChart = $('#show-chart').get(0).getContext("2d");
 			var newChart = new Chart($showChart).Pie(pieData, pieOptions);
 			$('#show-chart').append(newChart).css({
-				"display": "inline-block",
+				"display": "inline",
 				"top": "50",
 				"right": "400"
 			});
@@ -157,27 +201,91 @@ $(document).ready(function(){
 	};
 
 	$('#submit-email').click(function(){
+		$('#modal').toggle("fold")
+		$('#form-container').show();
 		$('#sign-up-form').hide();
 		firstQuestion();
-		$('#form-container').show();
-		$('#modal').show()
+		
 	})
 
-	$('#next-question').click(function(){
+	$('#second-question').click(function(){
+		$('#chart-container').toggle( "fold" );
 		$('canvas').remove();
 		$('#legend-list').empty();
-  	$('#chart-container').toggle( "fold" );
-  	$('#next-question').hide();
+  	$('#second-question').hide();
   	$('#third-question').show();
   	secondQuestion();
 	})
 
 	$('#third-question').click(function(){
+		$('#chart-container').toggle( "fold" );
 		$('canvas').remove();
 		$('#legend-list').empty();
-  	$('#chart-container').toggle( "fold" );
   	$('#third-question').hide();
+  	$('#fourth-question').show();
   	thirdQuestion();
+	});
+
+	$('#fourth-question').click(function(){
+		$('#chart-container').toggle( "fold" );
+		$('canvas').remove();
+		$('#legend-list').empty();
+  	$('#fourth-question').hide();
+  	$('#fifth-question').show();
+  	fourthQuestion();
+	});
+
+	$('#fifth-question').click(function(){
+		$('#chart-container').toggle( "fold" );
+		$('canvas').remove();
+		$('#legend-list').empty();
+  	$('#fifth-question').hide();
+  	$('#sixth-question').show();
+  	fifthQuestion();
+	});
+
+	$('#sixth-question').click(function(){
+		$('#chart-container').toggle( "fold" );
+		$('canvas').remove();
+		$('#legend-list').empty();
+  	$('#sixth-question').hide();
+  	$('#seventh-question').show();
+  	sixthQuestion();
+	});
+
+	$('#seventh-question').click(function(){
+		$('#chart-container').toggle( "fold" );
+		$('canvas').remove();
+		$('#legend-list').empty();
+  	$('#seventh-question').hide();
+  	$('#eigth-question').show();
+  	seventhQuestion();
+	});
+
+	$('#eigth-question').click(function(){
+		$('#chart-container').toggle( "fold" );
+		$('canvas').remove();
+		$('#legend-list').empty();
+  	$('#eigth-question').hide();
+  	$('#ninth-question').show();
+  	eigthQuestion();
+	});
+
+	$('#ninth-question').click(function(){
+		$('#chart-container').toggle( "fold" );
+		$('canvas').remove();
+		$('#legend-list').empty();
+  	$('#ninth-question').hide();
+  	$('#tenth-question').show();
+  	ninthQuestion();
+	});
+
+	$('#tenth-question').click(function(){
+		$('#chart-container').toggle( "fold" );
+		$('canvas').remove();
+		$('#legend-list').empty();
+  	$('#tenth-question').hide();
+  	tenthQuestion();
 	});
 
 	var updateData = function() {
