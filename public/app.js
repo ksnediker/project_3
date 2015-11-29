@@ -1,10 +1,12 @@
-$(document).ready(function(){
+// $(document).ready(function(){
 	var $getKeyName = null;
 	var arr = [];
 	var changeData = [];
 	var id = null;
 	var form = null;
 	var question = null;
+	var keyValues = [];
+	var barGraphLabels = [];
 
 	var renderFirstTemplate = function() {
 		
@@ -24,19 +26,24 @@ $(document).ready(function(){
 	   				body: arr
 	   		};
 
+	   		// console.log(data[0][form].answers[0]);
 				$('#modal').show();
 	   		id = data[0]._id;
 	   		$('.entry').empty()
 	   		$('#form-container').append(template(context));
 	   		$('#submit-answer').click(function(){
-
 					for (var k = 0; k < arr.length; k++) {
+						if (form === "form3") {
+							keyValues.push(data[0][form].answers[0][arr[k]]);
+							barGraphLabels = arr;
+						}
 						if ($( '#' + k ).is(':checked')){
 							var $getKeyName = $( '#' + k ).val()
 							data[0][form].answers[0][$getKeyName] = data[0][form].answers[0][$getKeyName] + 1
-							changeData.push(data[0][form].answers[0])													
-						} 
+							changeData.push(data[0][form].answers[0])
+						}
 					}
+					console.log(keyValues)
 					updateData();
 				});
 	    });
@@ -126,37 +133,41 @@ $(document).ready(function(){
 		renderFirstTemplate();
 	}
 
-	var seventhQuestion = function() {
-		console.log("Hello");
-		currentForm(7);
-		currentQuestion(7);
-		renderFirstTemplate();
-	}
+	// var seventhQuestion = function() {
+	// 	console.log("Hello");
+	// 	currentForm(7);
+	// 	currentQuestion(7);
+	// 	renderFirstTemplate();
+	// }
 
-	var eigthQuestion = function() {
-		currentForm(8);
-		currentQuestion(8);
-		renderFirstTemplate();
-	}
+	// var eigthQuestion = function() {
+	// 	currentForm(8);
+	// 	currentQuestion(8);
+	// 	renderFirstTemplate();
+	// }
 
-	var ninthQuestion = function() {
-		currentForm(9);
-		currentQuestion(9);
-		renderFirstTemplate();
-	}
+	// var ninthQuestion = function() {
+	// 	currentForm(9);
+	// 	currentQuestion(9);
+	// 	renderFirstTemplate();
+	// }
 
-	var tenthQuestion = function() {
-		currentForm(10);
-		currentQuestion(10);
-		renderFirstTemplate();
-	}
+	// var tenthQuestion = function() {
+	// 	currentForm(10);
+	// 	currentQuestion(10);
+	// 	renderFirstTemplate();
+	// }
 
 	var chartRender = function() {
 		$('#chart-container').show();
 		$('#modal').toggle('fold');
-		arr = [];
 
 		$.ajax('http://localhost:3000/surveys').done( function(data){
+
+			if (form === "form3") {
+				makeBarChart();
+			} else {
+
 
 			var answerNames = Object.keys(data[0][form].answers[0]);
 			var pieData = [];
@@ -197,15 +208,53 @@ $(document).ready(function(){
 				"top": "50",
 				"right": "400"
 			});
+		}
 		});
+		arr = [];
 	};
 
-	$('#submit-email').click(function(){
-		$('#modal').toggle("fold")
-		$('#form-container').show();
-		$('#sign-up-form').hide();
-		firstQuestion();
+	
+	var makeBarChart = function() {
 		
+		var data = {
+    	labels: barGraphLabels,
+	    datasets: [
+	      {
+	        label: "My First dataset",
+	        fillColor: "rgb(255, 179, 71)",
+	        strokeColor: "rgb(255, 179, 71)",
+	        highlightFill: "rgba(149, 43, 29, .4)",
+	        highlightStroke: "rgba(149, 43, 29, .4)",
+	        data: keyValues
+	      }
+   	  ]
+		};
+
+		console.log(data)
+
+		var barOptions = {
+			scaleBeginAtZero : true
+		}
+		$('#chart-container').prepend("<canvas id='show-chart'></canvas>");
+	   	var $showChart = $('#show-chart').get(0).getContext("2d");
+			var newChart = new Chart($showChart).Bar(data, barOptions);
+			$('#show-chart').append(newChart).css({
+				"display": "inline",
+				"top": "50",
+				"right": "400"
+			});
+	}
+
+	$('#submit-email').click(function(){
+		// if (!document.cookie) {
+			$('#modal').toggle("fold")
+			$('#form-container').show();
+			$('#sign-up-form').hide();
+			userSignup();	
+			firstQuestion();
+		// }	else {
+		// 	console.log("You've taken survey");
+		// }
 	})
 
 	$('#second-question').click(function(){
@@ -249,44 +298,44 @@ $(document).ready(function(){
 		$('canvas').remove();
 		$('#legend-list').empty();
   	$('#sixth-question').hide();
-  	$('#seventh-question').show();
+  	// $('#seventh-question').show();
   	sixthQuestion();
 	});
 
-	$('#seventh-question').click(function(){
-		$('#chart-container').toggle( "fold" );
-		$('canvas').remove();
-		$('#legend-list').empty();
-  	$('#seventh-question').hide();
-  	$('#eigth-question').show();
-  	seventhQuestion();
-	});
+	// $('#seventh-question').click(function(){
+	// 	$('#chart-container').toggle( "fold" );
+	// 	$('canvas').remove();
+	// 	$('#legend-list').empty();
+ //  	$('#seventh-question').hide();
+ //  	$('#eigth-question').show();
+ //  	seventhQuestion();
+	// });
 
-	$('#eigth-question').click(function(){
-		$('#chart-container').toggle( "fold" );
-		$('canvas').remove();
-		$('#legend-list').empty();
-  	$('#eigth-question').hide();
-  	$('#ninth-question').show();
-  	eigthQuestion();
-	});
+	// $('#eigth-question').click(function(){
+	// 	$('#chart-container').toggle( "fold" );
+	// 	$('canvas').remove();
+	// 	$('#legend-list').empty();
+ //  	$('#eigth-question').hide();
+ //  	$('#ninth-question').show();
+ //  	eigthQuestion();
+	// });
 
-	$('#ninth-question').click(function(){
-		$('#chart-container').toggle( "fold" );
-		$('canvas').remove();
-		$('#legend-list').empty();
-  	$('#ninth-question').hide();
-  	$('#tenth-question').show();
-  	ninthQuestion();
-	});
+	// $('#ninth-question').click(function(){
+	// 	$('#chart-container').toggle( "fold" );
+	// 	$('canvas').remove();
+	// 	$('#legend-list').empty();
+ //  	$('#ninth-question').hide();
+ //  	$('#tenth-question').show();
+ //  	ninthQuestion();
+	// });
 
-	$('#tenth-question').click(function(){
-		$('#chart-container').toggle( "fold" );
-		$('canvas').remove();
-		$('#legend-list').empty();
-  	$('#tenth-question').hide();
-  	tenthQuestion();
-	});
+	// $('#tenth-question').click(function(){
+	// 	$('#chart-container').toggle( "fold" );
+	// 	$('canvas').remove();
+	// 	$('#legend-list').empty();
+ //  	$('#tenth-question').hide();
+ //  	tenthQuestion();
+	// });
 
 	var updateData = function() {
 
@@ -307,35 +356,16 @@ $(document).ready(function(){
     return color;
 	}
 
+	var userSignup = function(){
+    console.log("click")
+    var emailInput = $("#user-email").val();
+    var user = {
+      email: emailInput,
+    };
+    // ajax post call to create the user
+    $.post("/users", user );
+    console.log(user);
+  };
 
-	// var secondRender = function() {
-		
-	// 	$('#form-container').hide();
-
-	// 	$.ajax('http://localhost:3000/surveys').done( function(data){
-
-	// 		var testing = Object.keys(data[0].form1.answers[0]);
-	// 		// var genderPieData = [];
-
-	// 		// for (var d = 0; d < Object.keys(data[0].form1.answers[0]); d++) {
-	// 		// 	genderPieData.push( {value: data[0].form1.answers[0][testing], color: getRandomColor(), label: testing})
-	// 		// }
-
-	// 		var genderPieData = [
-	// 				{value: data[0].form1.answers[0].Beagle,
-	// 					color: getRandomColor(),
-	// 					label: testing }
-	// 		]
-
-	// 		console.log(genderPieData)
-	// 		var pieOptions = {
-	// 		  segmentShowStroke : false,
-	// 		  animateScale : true
-	// 		}
-	// 		console.log(genderPieData)
-	//    	var gender = document.getElementById('gender').getContext("2d");
-	// 		var newGenderChart = new Chart(gender).Pie(genderPieData, pieOptions);
-	// 	});
-	// };
-});
+// });
 

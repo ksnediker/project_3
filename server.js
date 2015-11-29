@@ -33,6 +33,8 @@ app.post('/users', function(req,res){
      email: req.body.email,
   });
 
+  console.log(user)
+  console.log(user.id)
   user.save(function(err) {
     if (err){
       console.log(err);
