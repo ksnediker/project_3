@@ -30,27 +30,27 @@ var SurveySchema = new mongoose.Schema({
 		question6: String,
 		form6: {
 			answers: []
-		},
-		question7: String,
-		form7: {
-			answers: []
-		},
-		question8: String,
-		form8: {
-			answers: []
-		},
-		question9: String,
-		form9: {
-			answers: []
-		},
-		question10: String,
-		form10: {
-			answers: []
-		},
-		question11: String,
-		form11: {
-			answers: []
 		}
+		// question7: String,
+		// form7: {
+		// 	answers: []
+		// },
+		// question8: String,
+		// form8: {
+		// 	answers: []
+		// },
+		// question9: String,
+		// form9: {
+		// 	answers: []
+		// },
+		// question10: String,
+		// form10: {
+		// 	answers: []
+		// },
+		// question11: String,
+		// form11: {
+		// 	answers: []
+		// }
 });
 
 		// question1: {
