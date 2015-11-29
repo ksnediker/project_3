@@ -1,7 +1,13 @@
 .section {
-	height: 25em;
-	width: 100%;
-	background-color: rgb(149, 43, 29);
+	height: 33em;
+	width: 90%;
+	margin-left: 5%;
+	background-color: rgba(149, 43, 29, .4);
+}
+
+#sign-up-form {
+	margin-top: 6%;
+	margin-left: 7%;
 }
 
 .section-two {
@@ -33,5 +39,104 @@
 	left: 25%;
 	width: 75%;
 	height: 75%;
-	background-color: red;
+}
+
+/*#submit-email {
+	width: 8em;
+	height: 3em;
+	background-color: blue;
+	color: white;
+	font-size: .9em;
+	margin-left: 2%;
+}*/
+
+button {
+	width: 8em;
+	height: 3em;
+	background-color: blue;
+	color: white;
+	font-size: .9em;
+	margin-left: 2%;
+}
+
+#user-email {
+	width: 11em;
+	height: 3em;
+}
+
+.body > input {
+	margin: 1% 1% 1% 1%;
+}
+
+.body > button {
+	margin: 1% 1% 1% 1%;
+	width: 8em;
+	height: 3em;
+}
+
+.entry > h1 {
+	margin: 3% 1% 1% 1%;
+}
+
+#show-chart {
+	height: 50%;
+	width: 50%;
+	margin-top: 3%;
+}
+
+#legend-list {
+	list-style-type: none;
+	display: inline-block;
+}
+
+#legend {
+	display: inline-block;
+}
+input {
+	font-size: 1em;
+}
+#chart-container {
+	display: none;
+	background-color: #C8C8C8;
+	margin-top: 10%;
+}
+
+#third-question {
+	display: none;
+}
+
+#fourth-question {
+	display: none;
+}
+
+#fifth-question {
+	display: none;
+}
+
+#sixth-question {
+	display: none;
+}
+
+#seventh-question {
+	display: none;
+}
+
+#eigth-question {
+	display: none;
+}
+
+#ninth-question {
+	display: none;
+}
+
+#tenth-question {
+	display: none;
+}
+
+#eleventh-question {
+	display: none;
+}
+
+h3 {
+	text-align: center;
 }

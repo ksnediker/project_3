@@ -19,6 +19,7 @@
 	</div>
 	<script id="first-template" type="text/x-handlebars-template">
 		<div class="entry">
+			<br><br>
 			<h1>{{title}}</h1>
 			<div class="body">
 				{{#each body}}
@@ -31,17 +32,39 @@
 	</script>
 
 	<script id="second-template" type="text/x-handlebars-template">
-		<div class="entry">
-			<h1>{{title}}</h1>
-			<div class="body">
-				{{body}}
-			</div>
+	// 	<div class="entry">
+	// 		<br><br>
+	// 		<h1>{{title}}</h1>
+	// 		<div class="body">
+	// 			{{#each body}}
+	// 				<input type="radio" name="radAnswer" value={{this}} id={{@key}}>{{this}}</input>					
+	// 				<br>
+	// 			{{/each}}
+	// 			<button id="submit-answer">Submit</button>
+	// 		</div>
+	// 	</div>
+	// </script>
+
+	<div id="chart-container">
+		<div id="legend">
+			<ul id="legend-list">
+			</ul>
 		</div>
-	</script>
+		<button id="second-question">Next Question</button>
+		<button id="third-question">Next Question</button>
+		<button id="fourth-question">Next Question</button>
+		<button id="fifth-question">Next Question</button>
+		<button id="sixth-question">Next Question</button>
+		<button id="seventh-question">Next Question</button>
+		<button id="eigth-question">Next Question</button>
+		<button id="ninth-question">Next Question</button>
+		<button id="tenth-question">Next Question</button>
+	<div>
 
 	<div class="section" id="form-container"></div>
 	<div class="section-two" id="form-container-two"></div>
 
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
 </body>
