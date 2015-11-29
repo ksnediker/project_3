@@ -1,44 +1,86 @@
 $(document).ready(function(){
+	// our favorite mutants
 	var $getKeyName = null;
 	var arr = [];
 	var changeData = [];
 	var id = null;
 	var form = null;
 	var question = null;
+	var keyValues = [];
+	var barGraphLabels = [];
+	var wordCloud = null;
+	var inputWords = null;
+	var splitArr = null;
 
 	var renderFirstTemplate = function() {
-		
+		changeData = [];
+		var renderArr = [];
 		var source = $("#first-template").html();
 		var template = Handlebars.compile(source);
 		
 		$.ajax('http://localhost:3000/surveys').done( function(data){
 				
+				if (form === "form6") {
+					wordCloud = data[0][form].answers[0];
+					$('#word-cloud-question').show();
+					$('#submit-cloud').click(function(){
+						inputWords = $('#submit-words').val();
+						splitArr = inputWords.split(" ");
+						pushToCloud(splitArr)
+						changeData.push(wordCloud)
+						if (!(form in changeData[0])) {
+							var newKey = form;
+							changeData[0][newKey] = 1;
+						}
+						$('#word-cloud-question').toggle("fold");
+						$('.word-cloud').toggle("fold");
+						renderWordCloud();
+						updateData();
+					})
+					
+					
+				} else {
 	  		
-	   		$.each((data[0][form].answers[0]), function(index, value){
-	   				arr.push(index);
-	   		});
-	   		console.log(data[0][form]);
-	   		console.log(question);
-	   		var context = {
-	   				title: data[0][form, question], 
-	   				body: arr
-	   		};
+			   		$.each((data[0][form].answers[0]), function(index, value){
+			   				arr.push(index);
+			   		});
 
-				$('#modal').show();
-	   		id = data[0]._id;
-	   		$('.entry').empty()
-	   		$('#form-container').append(template(context));
-	   		$('#submit-answer').click(function(){
+			   		for (var m = 0; m < arr.length; m ++) {
+			   			renderArr.push(arr[m].replace("_", " "));
+			   		}
+			   		console.log(arr)
+			   		var context = {
+			   				title: data[0][form, question], 
+			   				body: arr
+			   		};
 
-					for (var k = 0; k < arr.length; k++) {
-						if ($( '#' + k ).is(':checked')){
-							var $getKeyName = $( '#' + k ).val()
-							data[0][form].answers[0][$getKeyName] = data[0][form].answers[0][$getKeyName] + 1
-							changeData.push(data[0][form].answers[0])													
-						} 
-					}
-					updateData();
-				});
+						$('#modal').show();
+			   		id = data[0]._id;
+			   		$('.entry').empty()
+			   		$('#form-container').append(template(context));
+			   		$('#submit-answer').click(function(){
+							for (var k = 0; k < arr.length; k++) {
+								if (form === "form3") {
+									keyValues.push(data[0][form].answers[0][arr[k]]);
+									barGraphLabels = renderArr;
+								}
+								if ($( '#' + k ).is(':checked')){
+									console.log(k);
+									console.log($('#' + k).val())
+									
+									var $getKeyName = $( '#' + k ).val()
+									data[0][form].answers[0][$getKeyName] = data[0][form].answers[0][$getKeyName] + 1
+									changeData.push(data[0][form].answers[0])
+								}
+							}								
+								if (!(form in changeData[0])) {
+									var newKey = form;
+									changeData[0][newKey] = 1;
+								} 							
+						console.log(changeData)
+						updateData();
+					});
+		   		}
 	    });
 	}
 
@@ -120,43 +162,46 @@ $(document).ready(function(){
 		renderFirstTemplate();
 	}
 
-	var sixthQuestion = function() {
+	var getWordCloud = function() {
 		currentForm(6);
-		currentQuestion(6);
 		renderFirstTemplate();
 	}
 
-	var seventhQuestion = function() {
-		console.log("Hello");
-		currentForm(7);
-		currentQuestion(7);
-		renderFirstTemplate();
-	}
+	// var seventhQuestion = function() {
+	// 	console.log("Hello");
+	// 	currentForm(7);
+	// 	currentQuestion(7);
+	// 	renderFirstTemplate();
+	// }
 
-	var eigthQuestion = function() {
-		currentForm(8);
-		currentQuestion(8);
-		renderFirstTemplate();
-	}
+	// var eigthQuestion = function() {
+	// 	currentForm(8);
+	// 	currentQuestion(8);
+	// 	renderFirstTemplate();
+	// }
 
-	var ninthQuestion = function() {
-		currentForm(9);
-		currentQuestion(9);
-		renderFirstTemplate();
-	}
+	// var ninthQuestion = function() {
+	// 	currentForm(9);
+	// 	currentQuestion(9);
+	// 	renderFirstTemplate();
+	// }
 
-	var tenthQuestion = function() {
-		currentForm(10);
-		currentQuestion(10);
-		renderFirstTemplate();
-	}
+	// var tenthQuestion = function() {
+	// 	currentForm(10);
+	// 	currentQuestion(10);
+	// 	renderFirstTemplate();
+	// }
 
 	var chartRender = function() {
 		$('#chart-container').show();
 		$('#modal').toggle('fold');
-		arr = [];
 
 		$.ajax('http://localhost:3000/surveys').done( function(data){
+
+			if (form === "form3") {
+				makeBarChart();
+			} else {
+
 
 			var answerNames = Object.keys(data[0][form].answers[0]);
 			var pieData = [];
@@ -197,15 +242,51 @@ $(document).ready(function(){
 				"top": "50",
 				"right": "400"
 			});
+		}
 		});
+		arr = [];
 	};
 
-	$('#submit-email').click(function(){
-		$('#modal').toggle("fold")
-		$('#form-container').show();
-		$('#sign-up-form').hide();
-		firstQuestion();
+
+	var makeBarChart = function() {
 		
+		var data = {
+    	labels: barGraphLabels,
+	    datasets: [
+	      {
+	        label: "My First dataset",
+	        fillColor: "rgb(255, 179, 71)",
+	        strokeColor: "rgb(255, 179, 71)",
+	        highlightFill: "rgba(149, 43, 29, .4)",
+	        highlightStroke: "rgba(149, 43, 29, .4)",
+	        data: keyValues
+	      }
+   	  ]
+		};
+
+		var barOptions = {
+			scaleBeginAtZero : true
+		}
+		$('#chart-container').prepend("<canvas id='show-chart'></canvas>");
+	   	var $showChart = $('#show-chart').get(0).getContext("2d");
+			var newChart = new Chart($showChart).Bar(data, barOptions);
+			$('#show-chart').append(newChart).css({
+				"display": "inline",
+				"top": "50",
+				"right": "400"
+			});
+	}
+
+	$('#submit-email').click(function(){
+		// if (!document.cookie) {
+			$('#modal').toggle("fold")
+			$('#form-container').show();
+			$('#sign-up-form').hide();
+			userSignup();	
+			firstQuestion();
+		// }	else {
+		// 	console.log("You've taken survey");
+		// }
 	})
 
 	$('#second-question').click(function(){
@@ -249,53 +330,62 @@ $(document).ready(function(){
 		$('canvas').remove();
 		$('#legend-list').empty();
   	$('#sixth-question').hide();
-  	$('#seventh-question').show();
-  	sixthQuestion();
+  	// $('#seventh-question').show();
+  	$('#word-cloud-question').show();
+  	getWordCloud();
 	});
 
-	$('#seventh-question').click(function(){
-		$('#chart-container').toggle( "fold" );
-		$('canvas').remove();
-		$('#legend-list').empty();
-  	$('#seventh-question').hide();
-  	$('#eigth-question').show();
-  	seventhQuestion();
-	});
+	// $('#seventh-question').click(function(){
+	// 	$('#chart-container').toggle( "fold" );
+	// 	$('canvas').remove();
+	// 	$('#legend-list').empty();
+ //  	$('#seventh-question').hide();
+ //  	$('#eigth-question').show();
+ //  	seventhQuestion();
+	// });
 
-	$('#eigth-question').click(function(){
-		$('#chart-container').toggle( "fold" );
-		$('canvas').remove();
-		$('#legend-list').empty();
-  	$('#eigth-question').hide();
-  	$('#ninth-question').show();
-  	eigthQuestion();
-	});
+	// $('#eigth-question').click(function(){
+	// 	$('#chart-container').toggle( "fold" );
+	// 	$('canvas').remove();
+	// 	$('#legend-list').empty();
+ //  	$('#eigth-question').hide();
+ //  	$('#ninth-question').show();
+ //  	eigthQuestion();
+	// });
 
-	$('#ninth-question').click(function(){
-		$('#chart-container').toggle( "fold" );
-		$('canvas').remove();
-		$('#legend-list').empty();
-  	$('#ninth-question').hide();
-  	$('#tenth-question').show();
-  	ninthQuestion();
-	});
+	// $('#ninth-question').click(function(){
+	// 	$('#chart-container').toggle( "fold" );
+	// 	$('canvas').remove();
+	// 	$('#legend-list').empty();
+ //  	$('#ninth-question').hide();
+ //  	$('#tenth-question').show();
+ //  	ninthQuestion();
+	// });
 
-	$('#tenth-question').click(function(){
-		$('#chart-container').toggle( "fold" );
-		$('canvas').remove();
-		$('#legend-list').empty();
-  	$('#tenth-question').hide();
-  	tenthQuestion();
-	});
+	// $('#tenth-question').click(function(){
+	// 	$('#chart-container').toggle( "fold" );
+	// 	$('canvas').remove();
+	// 	$('#legend-list').empty();
+ //  	$('#tenth-question').hide();
+ //  	tenthQuestion();
+	// });
 
 	var updateData = function() {
-
+		console.log(changeData)
+		console.log(changeData[0])
 		$.ajax({
-		url: "http://localhost:3000/surveys/" + id,
-		method: "PUT",
-		data: changeData[0]
+			url: "http://localhost:3000/surveys/" + id,
+			method: "PUT",
+			data: changeData[0]
 		});
-		chartRender();
+			if (form === "form6") {
+				// renderWordCloud();
+				console.log("word cloud");
+				// $('#word-cloud-question').toggle("fold");
+				// $('.word-cloud').toggle("fold");
+			} else {
+					chartRender();
+			}							
 	}
 
 	function getRandomColor() {
@@ -307,35 +397,70 @@ $(document).ready(function(){
     return color;
 	}
 
+	var userSignup = function(){
+    var emailInput = $("#user-email").val();
+    var user = {
+      email: emailInput,
+    };
+    // ajax post call to create the user
+    $.post("/users", user );
+    console.log(user);
+  };
 
-	// var secondRender = function() {
-		
-	// 	$('#form-container').hide();
 
-	// 	$.ajax('http://localhost:3000/surveys').done( function(data){
-
-	// 		var testing = Object.keys(data[0].form1.answers[0]);
-	// 		// var genderPieData = [];
-
-	// 		// for (var d = 0; d < Object.keys(data[0].form1.answers[0]); d++) {
-	// 		// 	genderPieData.push( {value: data[0].form1.answers[0][testing], color: getRandomColor(), label: testing})
-	// 		// }
-
-	// 		var genderPieData = [
-	// 				{value: data[0].form1.answers[0].Beagle,
-	// 					color: getRandomColor(),
-	// 					label: testing }
-	// 		]
-
-	// 		console.log(genderPieData)
-	// 		var pieOptions = {
-	// 		  segmentShowStroke : false,
-	// 		  animateScale : true
-	// 		}
-	// 		console.log(genderPieData)
-	//    	var gender = document.getElementById('gender').getContext("2d");
-	// 		var newGenderChart = new Chart(gender).Pie(genderPieData, pieOptions);
-	// 	});
+	// var wordCloud = {
+	// 	"large": 10, 
+	// 	"awesome": 1, 
+	// 	"Amazing": 20
 	// };
+
+
+	var pushToCloud = function(array) {
+
+		for (var i = 0; i < array.length; i++) {	
+			if (!(array[i] in wordCloud)) {
+				var newKey = array[i].toLowerCase();
+				wordCloud[newKey] = 1;
+			} else if (array[i] in wordCloud) {
+				wordCloud[array[i]] = wordCloud[array[i]] + 1
+			}
+		};
+	};
+
+	var randomNumber = function(){
+		var random = Math.floor(Math.random() * 85);
+		return random + '%';
+	};
+
+
+	var renderWordCloud = function() {
+		var sortedKeyValue = Object.keys(wordCloud).sort(function(a, b) {return -(wordCloud[a] - wordCloud[b])});
+		for (var x = 0; x < 6; x++) {
+			// $('.word-cloud').append("<h" + (x + 1) + ">");
+			$('.word-cloud').append("<h" + (x + 1) + ">" + sortedKeyValue[x] + "</h" + (x + 1) + ">");
+		};
+
+		// $('.word-cloud').find('h1').each(function(num){
+		// 	$(this).append( sortedKeyValue[num])
+		// })
+		for (var k = 6; k < sortedKeyValue.length; k++) {
+			// $('.word-cloud').append("<p id='word" + (k - 5) + "'>" + sortedKeyValue[k] + "</p>");
+			$('.word-cloud').append('<p>');
+		};
+		$('.word-cloud').append("<button id='testingg'>");
+		$('.word-cloud').find('p').each(function (num) {
+		  $(this).append( sortedKeyValue[num]).css({
+		    'position': 'absolute', 
+		    'top': randomNumber,
+		 		'left': randomNumber,
+		  });;
+		});
+	};
+
+	$('#testingg').click(function(){
+		console.log("test")
+	})
+
+
 });
 
