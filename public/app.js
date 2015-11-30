@@ -17,6 +17,7 @@ $(document).ready(function(){
 		var renderArr = [];
 		var source = $("#first-template").html();
 		var template = Handlebars.compile(source);
+		var tempArr = [];
 		
 		$.ajax('http://localhost:3000/surveys').done( function(data){
 				
@@ -33,8 +34,9 @@ $(document).ready(function(){
 							changeData[0][newKey] = 1;
 						}
 						$('#word-cloud-question').toggle("fold");
-						$('.word-cloud').toggle("fold");
+						$('#chart-container').remove();
 						renderWordCloud();
+						$('.word-cloud').toggle("fold");
 						updateData();
 					})
 					
@@ -43,6 +45,7 @@ $(document).ready(function(){
 	  		
 			   		$.each((data[0][form].answers[0]), function(index, value){
 			   				arr.push(index);
+			   				// tempArr.replace("_", " ").push(index);
 			   		});
 
 			   		for (var m = 0; m < arr.length; m ++) {
@@ -65,10 +68,10 @@ $(document).ready(function(){
 									barGraphLabels = renderArr;
 								}
 								if ($( '#' + k ).is(':checked')){
-									console.log(k);
-									console.log($('#' + k).val())
+									console.log(arr[k])
 									
-									var $getKeyName = $( '#' + k ).val()
+									// var $getKeyName = $( '#' + k ).val()
+									var $getKeyName = arr[k];
 									data[0][form].answers[0][$getKeyName] = data[0][form].answers[0][$getKeyName] + 1
 									changeData.push(data[0][form].answers[0])
 								}
@@ -447,7 +450,7 @@ $(document).ready(function(){
 			// $('.word-cloud').append("<p id='word" + (k - 5) + "'>" + sortedKeyValue[k] + "</p>");
 			$('.word-cloud').append('<p>');
 		};
-		$('.word-cloud').append("<button id='testingg'>");
+		
 		$('.word-cloud').find('p').each(function (num) {
 		  $(this).append( sortedKeyValue[num]).css({
 		    'position': 'absolute', 
@@ -455,11 +458,8 @@ $(document).ready(function(){
 		 		'left': randomNumber,
 		  });;
 		});
-	};
 
-	$('#testingg').click(function(){
-		console.log("test")
-	})
+	};
 
 
 });
