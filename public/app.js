@@ -33,8 +33,9 @@ $(document).ready(function(){
 							changeData[0][newKey] = 1;
 						}
 						$('#word-cloud-question').toggle("fold");
-						$('.word-cloud').toggle("fold");
+						$('#chart-container').remove();
 						renderWordCloud();
+						$('.word-cloud').toggle("fold");
 						updateData();
 					})
 					
@@ -447,7 +448,7 @@ $(document).ready(function(){
 			// $('.word-cloud').append("<p id='word" + (k - 5) + "'>" + sortedKeyValue[k] + "</p>");
 			$('.word-cloud').append('<p>');
 		};
-		$('.word-cloud').append("<button id='testingg'>");
+		
 		$('.word-cloud').find('p').each(function (num) {
 		  $(this).append( sortedKeyValue[num]).css({
 		    'position': 'absolute', 
@@ -455,11 +456,8 @@ $(document).ready(function(){
 		 		'left': randomNumber,
 		  });;
 		});
-	};
 
-	$('#testingg').click(function(){
-		console.log("test")
-	})
+	};
 
 
 });
