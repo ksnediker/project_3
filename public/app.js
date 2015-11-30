@@ -8,7 +8,7 @@ $(document).ready(function(){
 	var question = null;
 	var keyValues = [];
 	var barGraphLabels = [];
-	var wordCloud = {};
+	var wordCloud = null;
 	var inputWords = null;
 	var splitArr = null;
 	var radarValues = [];
@@ -24,7 +24,9 @@ $(document).ready(function(){
 		$.ajax('/surveys').done( function(data){
 				
 				if (form === "form6") {
+					console.log(form)
 					wordCloud = data[0][form].answers[0];
+					console.log(wordCloud)
 					$('#word-cloud-question').show();
 					$('#submit-cloud').click(function(){
 						inputWords = $('#submit-words').val();
