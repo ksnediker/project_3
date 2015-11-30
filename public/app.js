@@ -253,15 +253,15 @@ $(document).ready(function(){
   }
 
 	$('#submit-email').click(function(){
-		// if (!document.cookie) {
+		if (!document.cookie) {
 			$('#modal').toggle("fold")
 			$('#form-container').show();
 			$('#sign-up-form').hide();
 			userSignup();	
 			firstQuestion();
-		// }	else {
-		// 	console.log("You've taken survey");
-		// }
+		}	else {
+			console.log("You've taken survey");
+		}
 	})
 
 	$('#second-question').click(function(){
