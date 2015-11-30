@@ -28,8 +28,7 @@ $(document).ready(function(){
 	   		id = data[0]._id;
 	   		$('.entry').empty()
 	   		$('#form-container').append(template(context));
-	   		$('#submit-answer').click(function(){
-
+	   		$('#submit-answer').click(function(){	   				
 					for (var k = 0; k < arr.length; k++) {
 						if ($( '#' + k ).is(':checked')){
 							var $getKeyName = $( '#' + k ).val()
@@ -38,45 +37,26 @@ $(document).ready(function(){
 						} 
 					}
 					updateData();
+					
 				});
 	    });
 	}
 
-	// var renderSecondTemplate = function() {
-	// 	var source = $("#second-template").html();
-	// 	var template = Handlebars.compile(source);
-		
-	// 	$.ajax('http://localhost:3000/surveys').done( function(data){
+	// user authentication
 
-			
-	//   		console.log(form)
-	//   		console.log((data[0][form].question))
-	// 			var context = {
-	//    				title: data[0][form].question, 
-	//    				body: arr
-	//    			};
-	  			
-	//    		$.each((data[0][form].answers[0]), function(index, value){
-	//    				arr.push(index);
-	//    		});
-	// 			$('#modal').show();
-	//    		id = data[0]._id;
+	var userSignup = function(){
+		console.log("click")
+			var emailInput = $("#user-email").val();
+			var user = {
+				email: emailInput,
+			};
+			// ajax post call to create the user
+			$.post("/users", user ).done( function(){
+				console.log("works");
+			});
+			console.log(user);
+		};
 
-	//    		$('#form-container').append(template(context));
-	//    		$('#submit-answer').click(function(){
-
-	// 				for (var k = 0; k < arr.length; k++) {
-	// 					if ($( '#' + k ).is(':checked')){
-	// 						var $getKeyName = $( '#' + k ).val()
-	// 						data[0][form].answers[0][$getKeyName] = data[0][form].answers[0][$getKeyName] + 1
-	// 						changeData.push(data[0][form].answers[0])													
-	// 					} 
-	// 				}
-	// 				$('#form-container').empty();
-	// 				updateData();
-	// 			});
-	//     });
-	// }
 
 	var currentForm = function( number ) {
     return form = "form" + number;
@@ -204,6 +184,7 @@ $(document).ready(function(){
 		$('#modal').toggle("fold")
 		$('#form-container').show();
 		$('#sign-up-form').hide();
+		userSignup();
 		firstQuestion();
 		
 	})
