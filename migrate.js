@@ -1,6 +1,6 @@
 // sample survey
-var Survey = mongoose.model('Survey', SurveySchema);
-module.exports = Survey;
+// var Survey = mongoose.model('Survey', SurveySchema);
+// module.exports = Survey;
 
 var survey1 = new Survey({
 
