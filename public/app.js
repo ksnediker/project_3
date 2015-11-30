@@ -8,7 +8,7 @@ $(document).ready(function(){
 	var question = null;
 	var keyValues = [];
 	var barGraphLabels = [];
-	var wordCloud = null;
+	var wordCloud = {};
 	var inputWords = null;
 	var splitArr = null;
 	var radarValues = [];
