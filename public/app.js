@@ -1,4 +1,4 @@
-$(document).ready(function(){
+// $(document).ready(function(){
 	// our favorite mutants
 	var $getKeyName = null;
 	var arr = [];
@@ -17,7 +17,6 @@ $(document).ready(function(){
 	var renderFirstTemplate = function() {
 		//reset data form
 		changeData = [];
-		var renderArr = [];
 		//handlebars
 		var source = $("#first-template").html();
 		var template = Handlebars.compile(source);
@@ -71,10 +70,10 @@ $(document).ready(function(){
 							for (var k = 0; k < arr.length; k++) {
 								if (form === "form3") {
 									keyValues.push(data[0][form].answers[0][arr[k]]);
-									barGraphLabels = renderArr;
+									barGraphLabels = arr;
 								} else if ( form === "form4") {
 									radarValues.push(data[0][form].answers[0][arr[k]]);
-      						radarLabels = renderArr;
+      						radarLabels = arr;
 								}
 								if ($( '#' + k ).is(':checked')){
 
@@ -200,6 +199,7 @@ $(document).ready(function(){
 
 	var makeBarChart = function() {
 		
+
 		var data = {
     	labels: barGraphLabels,
 	    datasets: [
@@ -403,5 +403,5 @@ $(document).ready(function(){
 	};
 
 
-});
+// });
 
