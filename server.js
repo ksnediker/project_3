@@ -129,7 +129,7 @@ var survey1 = new Survey({
     },
        question6: "Enter three words that sum up General Assembly to you",
        form6 : {
-        answers: {}
+        answers: {"amazing": 1, "decent": 1, "alright": 1, "fun": 1, "boring": 1, "wack": 1}
        }
   });
 
