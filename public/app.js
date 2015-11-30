@@ -21,7 +21,7 @@ $(document).ready(function(){
 		var template = Handlebars.compile(source);
 		var tempArr = [];
 		
-		$.ajax('http://localhost:3000/surveys').done( function(data){
+		$.ajax('/surveys').done( function(data){
 				
 				if (form === "form6") {
 					wordCloud = data[0][form].answers[0];
@@ -139,7 +139,7 @@ $(document).ready(function(){
 		$('#chart-container').show();
 		$('#modal').toggle('fold');
 
-		$.ajax('http://localhost:3000/surveys').done( function(data){
+		$.ajax('/surveys').done( function(data){
 
 			if (form === "form3") {
 				makeBarChart();
@@ -314,7 +314,7 @@ $(document).ready(function(){
 	var updateData = function() {
 
 		$.ajax({
-			url: "http://localhost:3000/surveys/" + id,
+			url: "/surveys/" + id,
 			method: "PUT",
 			data: changeData[0]
 		});
