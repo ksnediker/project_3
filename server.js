@@ -127,10 +127,10 @@ var survey1 = new Survey({
     form5 : {
       answers: {"Full Stack Developer": 0, "Front end Developer": 0, "Back end Developer": 0, "Software Engineer": 0, "Database Administrator": 0, "Other": 0}
     },
-       question6: "Enter three words that sum up General Assembly to you",
-       form6 : {
-        answers: {"amazing": 1, "decent": 1, "alright": 1, "fun": 1, "boring": 1, "wack": 1}
-       }
+    question6: "Enter three words that sum up General Assembly to you",
+    form6 : {
+      answers: {"amazing": 1, "decent": 1, "alright": 1, "fun": 1, "boring": 1, "wack": 1}
+    }
   });
 
 
