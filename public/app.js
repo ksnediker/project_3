@@ -260,7 +260,7 @@ $(document).ready(function(){
 			userSignup();	
 			firstQuestion();
 		}	else {
-			console.log("You've taken survey");
+			$("#sign-upform").append("<h1>Sorry, you've already taken this survey</h1>");
 		}
 	})
 
