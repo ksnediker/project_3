@@ -8,7 +8,7 @@ var express      = require('express'),
     // jsCookie = require('js-cookie');
     port         = process.env.PORT || 3000;
     app          = express();
-
+    mongoUri     = process.env.MONGOLAB_URI || 'mongodb://localhost/new_app';
 // MIDDLEWARE
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -16,10 +16,13 @@ app.use(cookieParser());
 // app.use(jsCookie());
 
 // DATABASE
-mongoose.connect('mongodb://localhost/new_app');
+// mongoose.connect('mongodb://localhost/new_app');
 
 // LISTENER
 app.listen(port);
+console.log('===== Connecting to DB ... =====', mongoUri);
+// var mongoUri =  process.env.MONGOLAB_URI || 'mongodb://localhost/new_app';
+mongoose.connect(mongoUri);
 
 // Models
 var Survey = require('./models/survey');
@@ -60,7 +63,7 @@ app.post('/users', function(req,res){
 // post answers to survey
 app.put ( '/surveys/:id', function(req,res){  
 
-  console.log(req.body)
+  // console.log(req.body)
 
   var newData = {};
   var form = "";
@@ -74,7 +77,7 @@ app.put ( '/surveys/:id', function(req,res){
   }
 
 
-    console.log(form)
+    // console.log(form)
     var changeVal = JSON.parse(req.body[i]);
     var targetKey = i;
     newData[i] = changeVal;
@@ -82,7 +85,7 @@ app.put ( '/surveys/:id', function(req,res){
 
   delete newData[form];
 
-  console.log(req.body)
+  // console.log(req.body)
   Survey.findOneAndUpdate({_id: req.params.id}, { [form] : { answers:[  newData  ] } } , function(err, survey) {
       
   });
@@ -94,6 +97,7 @@ app.put ( '/surveys/:id', function(req,res){
 // surveys route
 app.get('/surveys', function(req, res){
 
+  // console.log("Are you working?")
   Survey.find().then(function(result){
     res.send(result);
 
@@ -127,7 +131,7 @@ app.get('/surveys', function(req, res){
 //     },
 //        question6: "Enter three words that sum up General Assembly to you",
 //        form6 : {
-//         answers: {"Great": 1, "Terrible": 1, "Okay": 1}
+//         answers: {"great": 1, "terrible": 1, "okay": 1}
 //        }
 //   });
 
