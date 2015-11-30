@@ -17,6 +17,7 @@ $(document).ready(function(){
 		var renderArr = [];
 		var source = $("#first-template").html();
 		var template = Handlebars.compile(source);
+		var tempArr = [];
 		
 		$.ajax('http://localhost:3000/surveys').done( function(data){
 				
@@ -44,6 +45,7 @@ $(document).ready(function(){
 	  		
 			   		$.each((data[0][form].answers[0]), function(index, value){
 			   				arr.push(index);
+			   				// tempArr.replace("_", " ").push(index);
 			   		});
 
 			   		for (var m = 0; m < arr.length; m ++) {
@@ -66,10 +68,10 @@ $(document).ready(function(){
 									barGraphLabels = renderArr;
 								}
 								if ($( '#' + k ).is(':checked')){
-									console.log(k);
-									console.log($('#' + k).val())
+									console.log(arr[k])
 									
-									var $getKeyName = $( '#' + k ).val()
+									// var $getKeyName = $( '#' + k ).val()
+									var $getKeyName = arr[k];
 									data[0][form].answers[0][$getKeyName] = data[0][form].answers[0][$getKeyName] + 1
 									changeData.push(data[0][form].answers[0])
 								}
