@@ -252,6 +252,7 @@ $(document).ready(function(){
           });
   }
 
+// click events
 	$('#submit-email').click(function(){
 		if (!document.cookie) {
 			$('#modal').toggle("fold")
@@ -260,7 +261,8 @@ $(document).ready(function(){
 			userSignup();	
 			firstQuestion();
 		}	else {
-			$("#sign-upform").append("<h1>Sorry, you've already taken this survey</h1>");
+			$("#sign-up-form").empty();
+			$("#sign-up-form").append("<h1>Sorry, you've already taken this survey</h1>");
 		}
 	})
 
@@ -305,7 +307,6 @@ $(document).ready(function(){
 		$('canvas').remove();
 		$('#legend-list').empty();
   	$('#sixth-question').hide();
-  	// $('#seventh-question').show();
   	$('#word-cloud-question').show();
   	getWordCloud();
 	});
@@ -373,7 +374,7 @@ $(document).ready(function(){
 		for (var k = 6; k < sortedKeyValue.length; k++) {
 			$('.word-cloud').append('<p>');
 		};
-		
+		$('#thanks').show();
 		$('.word-cloud').find('p').each(function (num) {
 		  $(this).append( sortedKeyValue[num + 6]).css({
 		    'position': 'absolute', 
