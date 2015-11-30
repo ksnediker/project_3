@@ -63,26 +63,27 @@ app.post('/users', function(req,res){
 // post answers to survey
 app.put ( '/surveys/:id', function(req,res){  
 
-  // console.log(req.body)
+
 
   var newData = {};
   var form = "";
 
+  // setting form key value as flag to identify what we are updating
+  // loop through the object passed through ajax to find flag
   for(var i in req.body) {
     // i is key name of object
     // req.body[i] is key value
     if ((i === "form1") || (i === "form2") || (i === "form3") || (i === "form4") || (i === "form5") || (i === "form6")) {
       form = i;
-    //   delete req.body[form]
-  }
+    }
 
-
-    // console.log(form)
+    //assigning variables value of key and key value so we can pass it through and update our database
     var changeVal = JSON.parse(req.body[i]);
     var targetKey = i;
     newData[i] = changeVal;
   };
 
+  //delete flag before updating database
   delete newData[form];
 
   // console.log(req.body)

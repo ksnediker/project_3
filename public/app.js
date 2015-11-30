@@ -15,18 +15,20 @@ $(document).ready(function(){
   var radarLabels = [];
 
 	var renderFirstTemplate = function() {
+		//reset data form
 		changeData = [];
 		var renderArr = [];
+		//handlebars
 		var source = $("#first-template").html();
 		var template = Handlebars.compile(source);
 		var tempArr = [];
 		
 		$.ajax('/surveys').done( function(data){
 				
+				//check for word cloud
 				if (form === "form6") {
-					console.log(form)
+					//sets wordCloud to the value of the database
 					wordCloud = data[0][form].answers[0];
-					console.log(wordCloud)
 					$('#word-cloud-question').show();
 					$('#submit-cloud').click(function(){
 						inputWords = $('#submit-words').val();
@@ -34,11 +36,13 @@ $(document).ready(function(){
 						splitArr = lowerWords.split(" ");
 						pushToCloud(splitArr)
 						changeData.push(wordCloud)
+						// create flag for wordCloud, this is how we identify on server side
 						if (!(form in changeData[0])) {
 							var newKey = form;
 							changeData[0][newKey] = 1;
 						}
 						$('#word-cloud-question').toggle("fold");
+						// get rid of canvas
 						$('#chart-container').remove();
 						$('.word-cloud').toggle("fold");
 						updateData();
@@ -48,13 +52,11 @@ $(document).ready(function(){
 				} else {
 	  		
 			   		$.each((data[0][form].answers[0]), function(index, value){
+			   				// arr is array that displays string of options for body
 			   				arr.push(index);
 			   		});
 
-			   		for (var m = 0; m < arr.length; m ++) {
-			   			renderArr.push(arr[m].replace("_", " "));
-			   		}
-
+			   		// create variable to compile context, so we can render title and body in form
 			   		var context = {
 			   				title: data[0][form, question], 
 			   				body: arr
@@ -62,6 +64,7 @@ $(document).ready(function(){
 
 						$('#modal').show();
 			   		id = data[0]._id;
+			   		// empty handlebars form
 			   		$('.entry').empty()
 			   		$('#form-container').append(template(context));
 			   		$('#submit-answer').click(function(){
@@ -75,11 +78,13 @@ $(document).ready(function(){
 								}
 								if ($( '#' + k ).is(':checked')){
 
+									// set variable to keyname so we can increment value of key
 									var $getKeyName = arr[k];
 									data[0][form].answers[0][$getKeyName] = data[0][form].answers[0][$getKeyName] + 1
 									changeData.push(data[0][form].answers[0])
 								}
-							}								
+							}				
+							// creating flag				
 								if (!(form in changeData[0])) {
 									var newKey = form;
 									changeData[0][newKey] = 1;
@@ -90,16 +95,14 @@ $(document).ready(function(){
 	    });
 	}
 
+	// assigns the variable form with a value so we can swap form
 	var currentForm = function( number ) {
     return form = "form" + number;
 	}
 
+	// assigns variable question with value so we can properly display the question
 	var currentQuestion = function( number ) {
     return question = "question" + number;
-	}
-
-	var currentTemplate = function(temp) {
-		return template = "#" + temp + "-template"
 	}
 
 	var firstQuestion = function() {
@@ -254,9 +257,15 @@ $(document).ready(function(){
           });
   }
 
+// -------------------------
 // click events
+// -------------------------
+
+// User signs up, assigns cookie if they haven't taken survey
+// Cookie won't allow for survey to be taken again
 	$('#submit-email').click(function(){
 		if (!document.cookie) {
+			//opens up modal to start survey
 			$('#modal').toggle("fold")
 			$('#form-container').show();
 			$('#sign-up-form').hide();
@@ -313,7 +322,7 @@ $(document).ready(function(){
   	getWordCloud();
 	});
 
-
+	// put request
 	var updateData = function() {
 
 		$.ajax({
@@ -322,8 +331,9 @@ $(document).ready(function(){
 			data: changeData[0]
 		});
 			if (form === "form6") {
-				 delete wordCloud[form];
-				 renderWordCloud();
+				// don't want flag to be inserted into word cloud
+				delete wordCloud[form];
+				renderWordCloud();
 			} else {
 					chartRender();
 			}							
@@ -338,6 +348,7 @@ $(document).ready(function(){
     return color;
 	}
 
+	//creates user and assigns it a cookie
 	var userSignup = function(){
     var emailInput = $("#user-email").val();
     var user = {
@@ -348,6 +359,10 @@ $(document).ready(function(){
     console.log(user);
   };
 
+  // pushes split array into the cloud
+  // Checks to see if the key name exists in the cloud object
+  // if not, it creates a new key with a value of 1
+  // if it does exist, it adds 1 to the value
 	var pushToCloud = function(array) {
 
 		for (var i = 0; i < array.length; i++) {	
@@ -367,8 +382,8 @@ $(document).ready(function(){
 
 
 	var renderWordCloud = function() {
+		// sort keys in order of value
 		var sortedKeyValue = Object.keys(wordCloud).sort(function(a, b) {return -(wordCloud[a] - wordCloud[b])});
-		console.log(sortedKeyValue)
 		for (var x = 0; x < 6; x++) {
 			$('.word-cloud').append("<h" + (x + 1) + ">" + sortedKeyValue[x] + "</h" + (x + 1) + ">");
 		};
