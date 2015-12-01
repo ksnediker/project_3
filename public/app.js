@@ -1,4 +1,4 @@
-// $(document).ready(function(){
+$(document).ready(function(){
 	// our favorite mutants
 	var $getKeyName = null;
 	var arr = [];
@@ -403,5 +403,5 @@
 	};
 
 
-// });
+});
 
